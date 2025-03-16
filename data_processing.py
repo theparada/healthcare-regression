@@ -61,6 +61,16 @@ def process(data):
 
     # choose columns for the model
     dataModel = data[['Age', 'Gender', 'Blood Type', 'Medical Condition', 'Insurance Provider', 'Admission Type', 'Medication', 'Test Results', 'Stay Duration']]
-    labelModel = data[['Billing Amount']]
+    targetModel = data[['Billing Amount']]
 
-    return dataModel, labelModel
+    return dataModel, targetModel
+
+def splitData(data, train=0.5, val=0.3):
+    train_num = round(len(data)*train)
+    val_num = round(len(data)*val)
+
+    trainSet = data[:train_num]
+    valSet = data[train_num:val_num]
+    testSet = data[val_num:]
+
+    return trainSet, valSet, testSet
